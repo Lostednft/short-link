@@ -33,17 +33,13 @@ public class UrlController {
             throw new RuntimeException("Falha fluxo de geração de url encurtada");
 
         url.put("url", "https://xxxx.com/"+shortedUrl);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(url);
     }
 
     @GetMapping("/{url}")
     public ResponseEntity<String> getUrl (@PathVariable String url){
-
         Url urlShorted = urlRepository.findByShortUrl(url);
-
         if(urlShorted.getId().isEmpty()) throw new RuntimeException("Essa URI não existe");
-
         return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(urlShorted.getLongUrl())).build();
     }
 }

@@ -2,18 +2,23 @@ package com.service;
 
 import com.model.Url;
 import com.repository.UrlRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
-public class UrlService {
+public class  UrlService {
 
     @Autowired
     public UrlRepository urlRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(UrlService.class);
 
     public String ShortedUrl(String longUrl){
 
@@ -41,5 +46,11 @@ public class UrlService {
             shortUrl.append(alphaNums.charAt(rand.nextInt(alphaNums.length())));
         }
         return shortUrl.toString();
+    }
+
+    public void deleteUrlExpired(){
+
+        List<Url> urls = urlRepository.findUrlByExpiredAtBefore(LocalDateTime.now()).orElseThrow();
+        urlRepository.deleteAll(urls);
     }
 }

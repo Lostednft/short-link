@@ -29,11 +29,9 @@ public class UrlController {
         String newUrl = url.get("url");
         String shortedUrl = urlService.ShortedUrl(newUrl);
 
-        if(shortedUrl.isEmpty())
-            throw new RuntimeException("Falha fluxo de geração de url encurtada");
-
         url.put("url", "https://xxxx.com/"+shortedUrl);
         return ResponseEntity.status(HttpStatus.CREATED).body(url);
+
     }
 
     @GetMapping("/{url}")
@@ -43,4 +41,3 @@ public class UrlController {
         return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(urlShorted.getLongUrl())).build();
     }
 }
-

@@ -2,15 +2,12 @@ package com.service;
 
 import com.model.Url;
 import com.repository.UrlRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Service
 public class  UrlService {
@@ -18,9 +15,10 @@ public class  UrlService {
     @Autowired
     public UrlRepository urlRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(UrlService.class);
-
     public String ShortedUrl(String longUrl){
+
+        if(longUrl.isEmpty())
+            throw new NullPointerException("Url its required for create short url.");
 
         String shortUrl = GenerateShortUrl();
         Url url= new Url();

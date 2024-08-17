@@ -1,9 +1,8 @@
-package com.controller;
+package UrlCustomized.controller;
 
-import com.model.Url;
-import com.repository.UrlRepository;
-import com.service.UrlService;
-import org.springframework.beans.factory.annotation.Autowired;
+import UrlCustomized.model.Url;
+import UrlCustomized.repository.UrlRepository;
+import UrlCustomized.service.UrlService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +35,8 @@ public class UrlController {
 
     @GetMapping("/{url}")
     public ResponseEntity<String> getUrl (@PathVariable String url){
+
         Url urlShorted = urlRepository.findByShortUrl(url);
-        if(urlShorted.getId().isEmpty()) throw new RuntimeException("Essa URI não existe");
         return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(urlShorted.getLongUrl())).build();
     }
 }

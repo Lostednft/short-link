@@ -1,7 +1,7 @@
-package com.service;
+package UrlCustomized.service;
 
-import com.model.Url;
-import com.repository.UrlRepository;
+import UrlCustomized.model.Url;
+import UrlCustomized.repository.UrlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,17 +37,15 @@ public class  UrlService {
     }
 
     public String GenerateShortUrl(){
-
         String alphaNums = "QAZXSWECVFRTGBNHYUMKIOLPqazxswedcvfrtgbnhyujmkiolp0123456789";
-
         StringBuilder shortUrl = new StringBuilder();
         Random rand = new Random();
-
         int count = rand.nextInt(4,8);
 
         for (int i = 0; i < count; i++) {
             shortUrl.append(alphaNums.charAt(rand.nextInt(alphaNums.length())));
         }
+
         return shortUrl.toString();
     }
 
@@ -59,11 +57,10 @@ public class  UrlService {
 
     private boolean UrlValidate(String longUrl){
 
-        String regex = "^(\\b(https?://)\\b)?[a-zA-Z0-9]+\\.com(\\.br)?";
+        String regex = "^(https?://)?[a-zA-Z0-9]+\\.com(\\.br)?";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(longUrl);
-
         return matcher.find();
     }
 }

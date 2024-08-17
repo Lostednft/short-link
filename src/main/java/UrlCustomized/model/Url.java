@@ -1,4 +1,4 @@
-package com.model;
+package UrlCustomized.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
-package com.repository;
+package UrlCustomized.repository;
 
-import com.model.Url;
+import UrlCustomized.model.Url;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

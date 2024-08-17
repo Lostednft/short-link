@@ -1,5 +1,4 @@
-import com.model.Url;
-import com.service.UrlService;
+import UrlCustomized.service.UrlService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

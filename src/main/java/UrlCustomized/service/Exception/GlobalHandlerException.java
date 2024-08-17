@@ -1,4 +1,4 @@
-package com.service.Exception;
+package UrlCustomized.service.Exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

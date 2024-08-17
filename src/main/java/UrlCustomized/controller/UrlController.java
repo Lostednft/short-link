@@ -26,7 +26,7 @@ public class UrlController {
     public ResponseEntity<Map<String, String>> saveUrl (@RequestBody Map<String, String> url){
 
         String newUrl = url.get("url");
-        String shortedUrl = urlService.ShortedUrl(newUrl);
+        String shortedUrl = urlService.ShortenerUrl(newUrl);
 
         url.put("url", "https://xxxx.com/"+shortedUrl);
         return ResponseEntity.status(HttpStatus.CREATED).body(url);

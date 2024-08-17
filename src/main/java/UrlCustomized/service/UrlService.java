@@ -17,7 +17,7 @@ public class  UrlService {
     @Autowired
     public UrlRepository urlRepository;
 
-    public String ShortedUrl(String longUrl){
+    public String ShortenerUrl(String longUrl){
 
         if(!UrlValidate(longUrl))
             throw new IllegalArgumentException("URL dont allowed, try like ex: google.com");
@@ -55,12 +55,12 @@ public class  UrlService {
         urlRepository.deleteAll(urls);
     }
 
-    private boolean UrlValidate(String longUrl){
+    public boolean UrlValidate(String longUrl){
 
         String regex = "^(https?://)?[a-zA-Z0-9]+\\.com(\\.br)?";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(longUrl);
-        return matcher.find();
+        return matcher.matches();
     }
 }

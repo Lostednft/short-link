@@ -1,4 +1,4 @@
-package com.Exception;
+package com.service.Exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,5 +12,11 @@ public class GlobalHandlerException {
     public ResponseEntity UrlNullException(NullPointerException nullPointerException){
 
         return new ResponseEntity(nullPointerException.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity urlNotAllowed(IllegalArgumentException ilegalException){
+
+        return new ResponseEntity(ilegalException.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class  UrlService {
@@ -16,6 +18,9 @@ public class  UrlService {
     public UrlRepository urlRepository;
 
     public String ShortedUrl(String longUrl){
+
+        if(!UrlValidate(longUrl))
+            throw new IllegalArgumentException("URL dont allowed, try like ex: google.com");
 
         if(longUrl.isEmpty())
             throw new NullPointerException("Url its required for create short url.");
@@ -50,5 +55,15 @@ public class  UrlService {
 
         List<Url> urls = urlRepository.findUrlByExpiredAtBefore(LocalDateTime.now()).orElseThrow();
         urlRepository.deleteAll(urls);
+    }
+
+    private boolean UrlValidate(String longUrl){
+
+        String regex = "^(\\b(https?://)\\b)?[a-zA-Z0-9]+\\.com(\\.br)?";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(longUrl);
+
+        return matcher.find();
     }
 }
